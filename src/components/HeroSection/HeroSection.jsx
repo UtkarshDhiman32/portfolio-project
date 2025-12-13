@@ -220,10 +220,13 @@
 import React from 'react';
 import Lottie from "lottie-react";
 import developer from '../../assets/ChaiCode.json'
+import { useTheme } from '../context/ThemeContext';
 
 const HeroSection = () => {
+    const { isDarkMode } = useTheme();
     return (
-        <div id="home" className="pt-32 relative min-h-screen bg-[#1a0b2e] text-white overflow-hidden font-sans ">
+        <div id="home" className={`pt-32 relative min-h-screen overflow-hidden font-sans transition-colors duration-300 
+            ${isDarkMode ? 'bg-[#1a0b2e] text-white' : 'bg-white text-gray-900'}`}>
 
             {/* 1. BACKGROUND GLOW EFFECT */}
             <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-purple-900/40 rounded-full blur-[120px]" />
@@ -294,17 +297,17 @@ const HeroSection = () => {
 
                     {/* --- RIGHT TEXT --- */}
                     <div className="max-w-xs text-center md:text-left">
-                        <div className="text-white text-xl font-['Preahvihear'] mb-2 font-medium tracking-wide">
-                            A Designer who
+                        <div className={` text-xl font-['Preahvihear'] mb-2 font-medium tracking-wide ${isDarkMode ? 'text-white' : 'text-gray-950'}`}>
+                            A Developer who
                             <hr className="w-36 border-white -mt-1.5 mx-auto md:ml-0" />
                         </div>
                         <h2 className="text-3xl md:text-4xl font-bold leading-tight mt-2 md:mt-0">
-                            Judges a book <br /> by its <span className="relative inline-block text-purple-400">
-                                cover...
+                            Builds bridges between <br /> ideas  and  <span className="relative inline-block text-purple-400">
+                                reality...
                                 <span className="absolute -inset-1 border-2 border-white/50 rounded-[50%] skew-x-[-35deg]" aria-hidden="true"></span>
                             </span>
                         </h2>
-                        <p className="text-sm text-white mt-4 md:mt-2 whitespace-normal md:whitespace-nowrap">
+                        <p className={`text-sm  mt-4 md:mt-2 whitespace-normal md:whitespace-nowrap ${isDarkMode ? 'text-white' : 'text-gray-950'}`}>
                             Because if the cover does not impress you what else can?
                         </p>
                     </div>
@@ -333,14 +336,14 @@ const HeroSection = () => {
                         I'm a Software Engineer.
                     </h1>
 
-                    <p className="text-lg md:text-xl font-normal md:pl-64 font-['Preahvihear'] -mt-2 md:-mt-5 text-gray-300 ">
-                        Currently, I'm a Software Engineer at <span className="text-blue-500 font-semibold cursor-pointer">Facebook</span>,
-                    </p>
+                    {/* <p className={`text-lg md:text-xl font-normal md:pl-64 font-['Preahvihear'] -mt-2 md:-mt-5  ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                        Currently, I'm a Software Engineer at <span className="text-blue-500 font-semibold cursor-pointer">Enfec Solutions</span>,
+                    </p> */}
 
                     {/* Bio Paragraph */}
                     <p className="text-white font-['Preahvihear']  text-sm md:pt-28  md:text-lg leading-relaxed max-w-2xl mx-auto md:mx-0 lg:ml-32">
                         {/* Maine 'md:text-sm' ko 'md:text-base' kar diya taaki tablet pe thoda bada aur saaf dikhe */}
-                        A self-taught UI/UX designer, functioning in the industry for 3+ years now. I make meaningful and delightful digital products that create an equilibrium between user needs and business goals.
+                        A Senior Mobile Developer with 5+ years of experience in Flutter & Android. I lead development teams, ensure code quality, and translate complex client requirements into scalable, high-performance applications.
                     </p>
 
                 </div>

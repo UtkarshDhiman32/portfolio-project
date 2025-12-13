@@ -1,9 +1,14 @@
 import React from 'react';
-import { Twitter, Linkedin, Instagram } from 'lucide-react'; 
+import { Twitter, Linkedin, Instagram } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
 
 const Footer = () => {
+  const { isDarkMode } = useTheme();
+
   return (
-    <div id='contact' className='relative bg-[#0F051D] text-white font-sans py-20 px-6 overflow-hidden'>
+    <div id='contact' className={`relative  font-sans py-20 px-6 overflow-hidden transition-colors duration-300
+    ${isDarkMode ? 'bg-[#0F051D] text-white' : 'bg-gray-50 text-gray-900'}
+`}>
 
       {/* Container to center content naturally */}
       <div className='max-w-4xl mx-auto space-y-10'>
@@ -12,19 +17,18 @@ const Footer = () => {
         <h2 className='font-normal text-3xl font-[Preahvihear]'>Contact</h2>
 
         {/* Description */}
-        <p className='font-normal text-lg font-[Preahvihear] text-gray-400 max-w-2xl leading-relaxed'>
-          I'm currently looking to join a cross-functional team that values improving people's lives
-          through accessible design. Or have a project in mind? Let's connect.
+        <p className={`font-normal text-lg font-[Preahvihear]  max-w-2xl leading-relaxed ${isDarkMode ? 'text-gray-400' : 'text-gray-800'}`}>
+          I'm currently looking to join a forward-thinking team to build scalable, high-performance mobile applications. Have a complex project or a team that needs technical leadership? Let's connect.
         </p>
 
         {/* Email & Socials Section */}
         <div className='space-y-4'>
           <p className='font-normal text-lg font-[Preahvihear] text-white'>
-            ibrhaimmemon930@gmail.com
+            pranjul.dhiman@gmail.com
           </p>
 
           {/* Social Icons Row */}
-          <div className='flex gap-6 mt-4'>
+          <div className='flex gap-6 mt-8'>
             {/* Twitter Icon */}
             <a
               href="https://twitter.com"
@@ -37,19 +41,12 @@ const Footer = () => {
 
             {/* Optional: LinkedIn */}
             <a
-              href="#"
+              href="https://www.linkedin.com/in/pranjul-dhiman-031a997a/" target='blank'
               className="hover:text-[#A362FF] transition-colors duration-300"
             >
               <Linkedin size={24} />
             </a>
 
-            {/* Optional: Instagram */}
-            <a
-              href="#"
-              className="hover:text-[#A362FF] transition-colors duration-300"
-            >
-              <Instagram size={24} />
-            </a>
           </div>
         </div>
 

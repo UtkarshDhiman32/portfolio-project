@@ -171,28 +171,32 @@
 
 
 import React from 'react'
+import { useTheme } from '../context/ThemeContext';
 
 const ExampleProject = () => {
+
+    const { isDarkMode } = useTheme();
 
     const data = [
         {
             id: 1,
             title: 'Featured Project',
-            heading: 'Example Project',
-            content: 'A web app for visualizing personalized Spotify data. View your top artists, top tracks, recently played tracks, and detailed audio information about each track. Create and save new playlists of recommended tracks based on your existing playlists and more.',
+            heading: 'Amino Move',
+            content: 'Amino Move allows Amino Rewards members to earn FREE $AMO for improving their health and fitness. Claim your spot on the leaderboard by completing 10k steps a day and see how you rank against other Amino members.',
             img: '/example.svg'
         },
         {
             id: 2,
             title: 'Featured Project',
-            heading: 'Example Project',
-            content: 'A web app for visualizing personalized Spotify data. View your top artists, top tracks, recently played tracks, and detailed audio information about each track. Create and save new playlists of recommended tracks based on your existing playlists and more.',
+            heading: 'SmartBiz',
+            content: 'SmartBiz by Amazon is an online store and website builder that allows businesses to set up their own e-commerce websites quickly. It provides features like integrated shipping, payments, and customizable design themes.',
             img: '/example.svg'
         },
     ]
 
     return (
-        <div id='about' className='pt-20 px-4 md:px-10 pb-20 relative min-h-screen bg-[#140a26] text-white overflow-hidden'>
+        <div id='about' className={`pt-20 px-6 md:px-10 pb-20 relative min-h-screen overflow-hidden transition-colors duration-300
+            ${isDarkMode ? 'bg-[#140a26] text-white' : 'bg-gray-50 text-gray-900'}`}>
 
             <div className='mt-10 md:mt-20 space-y-24 lg:space-y-32'>
                 {data.map((item, index) => (
@@ -205,7 +209,7 @@ const ExampleProject = () => {
 
                         {/* Image Section */}
                         <div className='relative group w-full flex justify-center lg:block lg:w-auto'>
-                            
+
                             {/* Glow Effect */}
                             <div className="absolute inset-0 blur-3xl bg-purple-700 opacity-20 rounded-full -z-10"></div>
 
@@ -233,10 +237,10 @@ const ExampleProject = () => {
                                     /* Laptop Styles (Original Preserved) */
                                     lg:-mt-72 lg:w-[480px] lg:h-[285px] lg:mx-0
                                     
-                                    ${index % 2 === 0 
-                                        ? 'lg:ml-24' 
-                                        : 'lg:ml-16 lg:right-16 lg:mr-12'
-                                    }`}
+                                    ${index % 2 === 0
+                                            ? 'lg:ml-24'
+                                            : 'lg:ml-16 lg:right-16 lg:mr-12'
+                                        }`}
                                 />
                             </div>
                         </div>
@@ -244,9 +248,10 @@ const ExampleProject = () => {
                         {/* Text Section */}
                         <div className={`w-full px-2 md:px-0 lg:max-w-md flex flex-col 
                             ${index % 2 === 0 ? 'items-center lg:items-start' : 'items-center lg:items-end'}`}>
-                            
-                            <p className='text-base text-purple-400 font-mono tracking-wider lg:text-lg'>{item.title}</p>
-                            <h2 className='text-2xl font-bold mt-1 text-gray-100 lg:text-3xl'>{item.heading}</h2>
+
+                            <p className={`text-base  font-mono tracking-wider lg:text-lg ${isDarkMode ? 'text-purple-400' : 'text-purple-800'}`}>{item.title}</p>
+                            <h2 className={`text-2xl font-bold mt-1  lg:text-3xl
+                               ${isDarkMode ? 'text-gray-100' : 'text-gray-800'} `}>{item.heading}</h2>
 
                             {/* Content Box */}
                             {/* LOGIC: Mobile pe width full aur height auto. Laptop pe fixed width (670px) aur height (h-40). */}

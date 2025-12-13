@@ -1,9 +1,13 @@
 import React from 'react';
+import { useTheme } from '../context/ThemeContext';
 
 const Skills = () => {
+    const { isDarkMode } = useTheme();
+
+
     // 1. Top Static Icons (Tree Structure)
     const treeIcons = [
-        { name: 'Android', src: '/icons/android.svg' },
+        { name: 'Android', src: '/icons/android-green.png' },
         { name: 'Flutter', src: '/icons/flutter.svg' },
         { name: 'Kotlin', src: '/icons/kotlin.svg' },
         { name: 'Java', src: '/icons/java.svg' },
@@ -36,7 +40,7 @@ const Skills = () => {
     ];
 
     return (
-        <div className="relative min-h-screen bg-[#0F051D] text-white font-sans pt-20 px-4 overflow-hidden flex flex-col items-center">
+        <div className={`relative min-h-screen  font-sans pt-20 px-4 overflow-hidden flex flex-col items-center ${isDarkMode ? 'bg-[#0F051D] text-white' : 'bg-gray-50 text-gray-900'}`}>
 
             {/* HEADER */}
             <div className="text-center max-w-3xl mx-auto space-y-2 mb-10 relative z-30">

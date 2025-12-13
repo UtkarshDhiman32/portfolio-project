@@ -5,18 +5,24 @@ import Experience from './components/Experience/Experience'
 import Skills from './components/Skills/Skills'
 import ExampleProject from './components/Example-Project/ExampleProject'
 import Footer from './components/Footer/Footer'
-
+import { ThemeProvider } from './components/context/ThemeContext'
 
 function App() {
 
   return (
     <>
-      <Navbar />
-      <HeroSection />
-      <Experience />
-      <Skills />
-      <ExampleProject />
-      <Footer />
+      <ThemeProvider>
+
+        <div className="min-h-screen transition-colors duration-300">
+
+          <Navbar />
+          <HeroSection />
+          <Experience />
+          <Skills />
+          <ExampleProject />
+          <Footer />
+        </div>
+      </ThemeProvider>
     </>
   )
 }
