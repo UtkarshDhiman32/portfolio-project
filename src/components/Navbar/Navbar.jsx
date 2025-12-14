@@ -157,7 +157,9 @@
 
 
 import React, { useState, useEffect } from 'react';
+
 import { Menu, X, Sun, Moon } from 'lucide-react'; // Sun aur Moon icon import kiye
+
 import { useTheme } from '../context/ThemeContext';
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);

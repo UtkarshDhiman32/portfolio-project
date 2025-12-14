@@ -169,15 +169,130 @@
 
 // export default ExampleProject
 
+// fallback code 
 
-import React from 'react'
+
+// import React from 'react'
+// import { useTheme } from '../context/ThemeContext';
+
+// const ExampleProject = () => {
+
+//     const { isDarkMode } = useTheme();
+
+//     const data = [
+//         {
+//             id: 1,
+//             title: 'Featured Project',
+//             heading: 'Amino Move',
+//             content: 'Amino Move allows Amino Rewards members to earn FREE $AMO for improving their health and fitness. Claim your spot on the leaderboard by completing 10k steps a day and see how you rank against other Amino members.',
+//             img: '/example.svg'
+//         },
+//         {
+//             id: 2,
+//             title: 'Featured Project',
+//             heading: 'SmartBiz',
+//             content: 'SmartBiz by Amazon is an online store and website builder that allows businesses to set up their own e-commerce websites quickly. It provides features like integrated shipping, payments, and customizable design themes.',
+//             img: '/example.svg'
+//         },
+//     ]
+
+//     return (
+//         <div id='about' className={`pt-20 px-6 md:px-10 pb-20 relative min-h-screen overflow-hidden transition-colors duration-300
+//             ${isDarkMode ? 'bg-[#140a26] text-white' : 'bg-gray-50 text-gray-900'}`}>
+
+//             <div className='mt-10 md:mt-20 space-y-24 lg:space-y-32'>
+//                 {data.map((item, index) => (
+//                     <div
+//                         key={item.id}
+//                         // LOGIC: Mobile pe Vertical (Column), Laptop (lg) pe Original Horizontal Zig-Zag
+//                         className={`flex flex-col items-center gap-10 lg:gap-16 w-full justify-center 
+//                         ${index % 2 === 0 ? 'lg:flex-row-reverse lg:text-left' : 'lg:flex-row lg:text-right'}`}
+//                     >
+
+//                         {/* Image Section */}
+//                         <div className='relative group w-full flex justify-center lg:block lg:w-auto'>
+
+//                             {/* Glow Effect */}
+//                             <div className="absolute inset-0 blur-3xl bg-purple-700 opacity-20 rounded-full -z-10"></div>
+
+//                             {/* Background Blobs - Adjusted for Mobile & Laptop */}
+//                             <div className="absolute -top-12 left-1/2 -translate-x-1/2 w-[280px] h-[280px] md:w-[400px] md:h-[400px] lg:w-[500px] lg:h-[500px] bg-purple-900/40 rounded-full blur-[80px] lg:-top-20 lg:blur-[120px]" />
+//                             <div className="absolute top-10 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100px] h-[100px] lg:w-[150px] lg:h-[150px] bg-[rgba(118,60,172,1)] blur-[60px] lg:blur-[80px] rounded-full -z-10 pointer-events-none lg:top-20" />
+
+
+//                             <div className='p-2 rounded-xl backdrop-blur-sm relative'>
+
+//                                 {/* Border Image: Mobile height (h-48), Laptop original height (h-80) */}
+//                                 <img src="/border.svg" alt="" className='h-48 md:h-64 lg:h-80 rounded-xl mx-auto lg:mx-0' />
+
+//                                 <img
+//                                     src={item.img}
+//                                     alt=""
+//                                     // LOGIC CHANGE:
+//                                     // Mobile: Center alignment (mx-auto), small size, adjusted negative margin.
+//                                     // Laptop (lg:): Bilkul wahi purana code (ml-24, right-16, w-[480px] etc.)
+//                                     className={`relative rounded-lg object-cover shadow-2xl transition-transform duration-500 group-hover:scale-[1.02] backdrop-blur-3xl
+                                    
+//                                     /* Mobile & Tablet Styles */
+//                                     -mt-36 w-[280px] h-40 md:-mt-52 md:w-[380px] md:h-[220px] mx-auto
+
+//                                     /* Laptop Styles (Original Preserved) */
+//                                     lg:-mt-72 lg:w-[480px] lg:h-[285px] lg:mx-0
+                                    
+//                                     ${index % 2 === 0
+//                                             ? 'lg:ml-24'
+//                                             : 'lg:ml-16 lg:right-16 lg:mr-12'
+//                                         }`}
+//                                 />
+//                             </div>
+//                         </div>
+
+//                         {/* Text Section */}
+//                         <div className={`w-full px-2 md:px-0 lg:max-w-md flex flex-col 
+//                             ${index % 2 === 0 ? 'items-center lg:items-start' : 'items-center lg:items-end'}`}>
+
+//                             <p className={`text-base  font-mono tracking-wider lg:text-lg ${isDarkMode ? 'text-purple-400' : 'text-purple-800'}`}>{item.title}</p>
+//                             <h2 className={`text-2xl font-bold mt-1  lg:text-3xl
+//                                ${isDarkMode ? 'text-gray-100' : 'text-gray-800'} `}>{item.heading}</h2>
+
+//                             {/* Content Box */}
+//                             {/* LOGIC: Mobile pe width full aur height auto. Laptop pe fixed width (670px) aur height (h-40). */}
+//                             <div className={`mt-6 p-6 rounded-lg bg-[#1C1C2D]/90 backdrop-blur-md text-white leading-7 font-medium shadow-lg relative z-10 hover:shadow-xl transition-all 
+                                
+//                                 /* Mobile Styles */
+//                                 w-full h-auto text-center text-sm md:text-base
+
+//                                 /* Laptop Styles */
+//                                 lg:w-[670px] lg:h-40 lg:text-lg
+
+//                                 ${index % 2 === 0 ? 'lg:text-left' : 'lg:text-right'}`}>
+//                                 {item.content}
+//                             </div>
+//                         </div>
+
+//                     </div>
+//                 ))}
+//             </div>
+
+//         </div>
+//     )
+// }
+
+// export default ExampleProject
+
+
+
+import React, { useEffect, useState } from 'react';
 import { useTheme } from '../context/ThemeContext';
+// 1. Firebase imports add karo
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../../firebase';
 
 const ExampleProject = () => {
-
     const { isDarkMode } = useTheme();
 
-    const data = [
+    // 2. Hardcoded Data ko ek variable me rakh lete hain (Default Backup)
+    const defaultData = [
         {
             id: 1,
             title: 'Featured Project',
@@ -192,17 +307,59 @@ const ExampleProject = () => {
             content: 'SmartBiz by Amazon is an online store and website builder that allows businesses to set up their own e-commerce websites quickly. It provides features like integrated shipping, payments, and customizable design themes.',
             img: '/example.svg'
         },
-    ]
+    ];
+
+    // 3. State banate hain aur shuruat me 'defaultData' dalte hain
+    const [data, setData] = useState(defaultData);
+
+    // 4. useEffect lagao jo data fetch karega
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                // Tumhare screenshot ke hisab se path: portfolio_data -> example_project
+                const docRef = doc(db, "portfolio_data", "example_project");
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.exists()) {
+                    const backendData = docSnap.data();
+                    
+                    // Screenshot me data object format me hai {0: {..}, 1: {..}}
+                    // Isliye Object.values use karke array me convert karenge
+                    const formattedData = Object.values(backendData).map((item, index) => ({
+                        id: index + 10, // Unique ID
+                        title: 'Featured Project', // Ye static text hai
+                        // Mapping: Backend Key -> Frontend Key
+                        heading: item.title,      // DB me 'title' hai -> yaha 'heading'
+                        content: item.desc,       // DB me 'desc' hai -> yaha 'content'
+                        img: item.bg_cover        // DB me 'bg_cover' hai -> yaha 'img'
+                    }));
+
+                    // Agar data sahi se ban gya, to state update kar do
+                    console.log("Backend se data aa gya ✅");
+                    setData(formattedData);
+                } else {
+                    console.log("Document nahi mila, Hardcoded data dikhega.");
+                }
+
+            } catch (error) {
+                // Agar koi error aaya (Net issue, Server down), to hum kuch nahi karenge.
+                // State me already Hardcoded data hai, wahi dikhta rahega.
+                console.error("Error fetching data, Fallback to Hardcoded ❌", error);
+            }
+        };
+
+        fetchData();
+    }, []);
 
     return (
         <div id='about' className={`pt-20 px-6 md:px-10 pb-20 relative min-h-screen overflow-hidden transition-colors duration-300
             ${isDarkMode ? 'bg-[#140a26] text-white' : 'bg-gray-50 text-gray-900'}`}>
 
             <div className='mt-10 md:mt-20 space-y-24 lg:space-y-32'>
+                {/* 5. Yahan 'data' map hoga (jo ya to Backend wala hoga ya Hardcoded) */}
                 {data.map((item, index) => (
                     <div
                         key={item.id}
-                        // LOGIC: Mobile pe Vertical (Column), Laptop (lg) pe Original Horizontal Zig-Zag
                         className={`flex flex-col items-center gap-10 lg:gap-16 w-full justify-center 
                         ${index % 2 === 0 ? 'lg:flex-row-reverse lg:text-left' : 'lg:flex-row lg:text-right'}`}
                     >
@@ -210,33 +367,20 @@ const ExampleProject = () => {
                         {/* Image Section */}
                         <div className='relative group w-full flex justify-center lg:block lg:w-auto'>
 
-                            {/* Glow Effect */}
                             <div className="absolute inset-0 blur-3xl bg-purple-700 opacity-20 rounded-full -z-10"></div>
-
-                            {/* Background Blobs - Adjusted for Mobile & Laptop */}
                             <div className="absolute -top-12 left-1/2 -translate-x-1/2 w-[280px] h-[280px] md:w-[400px] md:h-[400px] lg:w-[500px] lg:h-[500px] bg-purple-900/40 rounded-full blur-[80px] lg:-top-20 lg:blur-[120px]" />
                             <div className="absolute top-10 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100px] h-[100px] lg:w-[150px] lg:h-[150px] bg-[rgba(118,60,172,1)] blur-[60px] lg:blur-[80px] rounded-full -z-10 pointer-events-none lg:top-20" />
 
 
                             <div className='p-2 rounded-xl backdrop-blur-sm relative'>
-
-                                {/* Border Image: Mobile height (h-48), Laptop original height (h-80) */}
                                 <img src="/border.svg" alt="" className='h-48 md:h-64 lg:h-80 rounded-xl mx-auto lg:mx-0' />
 
                                 <img
                                     src={item.img}
-                                    alt=""
-                                    // LOGIC CHANGE:
-                                    // Mobile: Center alignment (mx-auto), small size, adjusted negative margin.
-                                    // Laptop (lg:): Bilkul wahi purana code (ml-24, right-16, w-[480px] etc.)
+                                    alt={item.heading}
                                     className={`relative rounded-lg object-cover shadow-2xl transition-transform duration-500 group-hover:scale-[1.02] backdrop-blur-3xl
-                                    
-                                    /* Mobile & Tablet Styles */
                                     -mt-36 w-[280px] h-40 md:-mt-52 md:w-[380px] md:h-[220px] mx-auto
-
-                                    /* Laptop Styles (Original Preserved) */
                                     lg:-mt-72 lg:w-[480px] lg:h-[285px] lg:mx-0
-                                    
                                     ${index % 2 === 0
                                             ? 'lg:ml-24'
                                             : 'lg:ml-16 lg:right-16 lg:mr-12'
@@ -253,16 +397,9 @@ const ExampleProject = () => {
                             <h2 className={`text-2xl font-bold mt-1  lg:text-3xl
                                ${isDarkMode ? 'text-gray-100' : 'text-gray-800'} `}>{item.heading}</h2>
 
-                            {/* Content Box */}
-                            {/* LOGIC: Mobile pe width full aur height auto. Laptop pe fixed width (670px) aur height (h-40). */}
                             <div className={`mt-6 p-6 rounded-lg bg-[#1C1C2D]/90 backdrop-blur-md text-white leading-7 font-medium shadow-lg relative z-10 hover:shadow-xl transition-all 
-                                
-                                /* Mobile Styles */
                                 w-full h-auto text-center text-sm md:text-base
-
-                                /* Laptop Styles */
                                 lg:w-[670px] lg:h-40 lg:text-lg
-
                                 ${index % 2 === 0 ? 'lg:text-left' : 'lg:text-right'}`}>
                                 {item.content}
                             </div>
@@ -271,7 +408,6 @@ const ExampleProject = () => {
                     </div>
                 ))}
             </div>
-
         </div>
     )
 }

@@ -15,6 +15,16 @@ font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Firefox ke liye scrollbar chupana */
+html {
+  scrollbar-width: none;
+}
+
+
 /* :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

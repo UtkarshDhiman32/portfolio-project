@@ -265,175 +265,387 @@
 // export default Experience;
 
 
+// fallback data 
 
-import React from 'react';
+// import React from 'react';
+// import { useTheme } from '../context/ThemeContext';
+// import { MapPin, Calendar, Briefcase, CheckCircle2 } from 'lucide-react';
+// import { doc, getDoc } from 'firebase/firestore';
+// import { db } from '../../firebase';
+
+// const Experience = () => {
+//   const { isDarkMode } = useTheme();
+
+//   const experiences = [
+//     {
+//       id: 1,
+//       role: "Senior Mobile Developer",
+//       company: "SoftRadix Technologies",
+//       period: "May 2021 - Aug 2024",
+//       location: "Mohali, India",
+//       logo: "/Group1.svg",
+//       skills: ["Solo Development", "Team Building", "KMP Expertise"],
+//       responsibilities: [
+//         "I utilized Android and Flutter to develop mobile apps. Worked with cross-functional teams to design and implement new features",
+
+//         "Provided feedback on code quality during code reviews to ensure adherence to best practices.",
+
+//         "Various Android applications, such as Herency, SmartBiz - Logistics, Smartbiz partner app, and Chikasha Keyboard, have been developed and maintained."
+//       ]
+//     },
+//     {
+//       id: 2,
+//       role: "Android Developer",
+//       company: "Doozycod Systems",
+//       period: "Feb 2019 - April 2021",
+//       location: "Mohali, India",
+//       logo: "/Group1.svg",
+//       skills: ["Solo Development", "Team Building", "KMP Expertise"],
+//       responsibilities: [
+//         "Designed and developed native Android applications for a variety of clients, focusing on functionality, usability, and performance.",
+
+//         "Collaborated with product managers, designers, and other developers to understand project requirements and translate them into technical specifications and implementation plans.",
+
+//       ]
+//     },
+//     // Add more...
+//   ];
+
+//   return (
+//     <div id='work' className={`pt-20 pb-20 relative min-h-screen font-sans px-4 md:px-10 lg:px-20 transition-colors duration-300
+//             ${isDarkMode ? 'bg-[#1a0b2e] text-white' : 'bg-gray-50 text-gray-900'}`}>
+
+//       {/* --- BACKGROUND GLOWS --- */}
+//       <div className={`absolute top-[20%] left-0 w-[300px] md:w-[400px] h-[300px] md:h-[400px] blur-[120px] rounded-full pointer-events-none -z-10
+//                 ${isDarkMode ? 'bg-purple-900/40' : 'bg-purple-200/50'}`} />
+//       <div className={`absolute bottom-[20%] right-0 w-[300px] md:w-[400px] h-[300px] md:h-[400px] blur-[120px] rounded-full pointer-events-none -z-10
+//                 ${isDarkMode ? 'bg-blue-900/20' : 'bg-blue-200/50'}`} />
+
+
+//       {/* --- HEADING --- */}
+//       <div className="mb-12 md:mb-16 relative z-10 max-w-7xl mx-auto">
+//         <h2 className="text-3xl md:text-4xl font-bold text-center md:text-left font-['Preahvihear']">
+//           Work Experience
+//         </h2>
+//       </div>
+
+
+//       {/* --- CARDS CONTAINER --- */}
+//       <div className="space-y-8 md:space-y-10 max-w-7xl mx-auto relative z-10">
+
+//         {experiences.map((exp) => (
+//           <div
+//             key={exp.id}
+//             // MOBILE FIX: p-5 (Mobile) -> md:p-10 (Tablet/Laptop)
+//             className={`rounded-3xl p-5 md:p-10 transition-all duration-300 group
+//                             ${isDarkMode
+//                 ? 'bg-linear-to-b from-[#3a1c5e] to-[#2a0f45] border border-[#563085] shadow-[inset_0_1px_0_rgba(255,255,255,0.15)] hover:from-[#452270] hover:to-[#321355]'
+//                 : 'bg-white border border-gray-100 shadow-lg hover:shadow-2xl hover:-translate-y-1'
+//               }`}
+//           >
+//             {/* MOBILE FIX: gap-6 (Kam gap) -> lg:gap-12 (Bada gap) */}
+//             <div className="flex flex-col lg:flex-row gap-6 lg:gap-12">
+
+//               {/* === LEFT COLUMN: Role Info === */}
+//               {/* MOBILE FIX: space-y-4 (Compact) -> lg:space-y-6 (Relaxed) */}
+//               <div className="w-full lg:w-[35%] space-y-4 lg:space-y-6">
+//                 <div className="flex items-center gap-3 md:gap-4">
+
+//                   {/* MOBILE FIX: Logo Size w-12 (Mobile) -> w-14 (Tablet+) */}
+//                   <div className={`w-12 h-12 md:w-14 md:h-14 rounded-xl flex items-center justify-center p-2 shrink-0
+//                                         ${isDarkMode ? 'bg-white/10 backdrop-blur-sm' : 'bg-gray-50 border border-gray-100'}`}>
+//                     <img src={exp.logo} alt="Logo" className="w-full h-full object-contain" />
+//                   </div>
+
+//                   <div>
+//                     {/* MOBILE FIX: Font size text-lg (Mobile) -> text-xl (Tablet+) */}
+//                     <h3 className="text-lg md:text-xl font-bold leading-tight">{exp.role}</h3>
+//                     <p className={`text-sm font-semibold mt-0.5 md:mt-1 ${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>
+//                       {exp.company}
+//                     </p>
+//                   </div>
+//                 </div>
+
+//                 {/* Date & Location */}
+//                 <div className="space-y-2 md:space-y-3">
+//                   <div className={`flex items-center gap-3 p-2.5 md:p-3 rounded-xl transition-colors
+//                                         ${isDarkMode ? 'bg-[#2a1454]/50 border border-white/5' : 'bg-gray-100 text-gray-700'}`}>
+//                     <Calendar size={16} className="text-purple-400 shrink-0 md:w-[18px] md:h-[18px]" />
+//                     <span className="text-xs md:text-sm font-medium opacity-90">{exp.period}</span>
+//                   </div>
+//                   <div className={`flex items-center gap-3 p-2.5 md:p-3 rounded-xl transition-colors
+//                                         ${isDarkMode ? 'bg-[#2a1454]/50 border border-white/5' : 'bg-gray-100 text-gray-700'}`}>
+//                     <MapPin size={16} className="text-purple-400 shrink-0 md:w-[18px] md:h-[18px]" />
+//                     <span className="text-xs md:text-sm font-medium opacity-90">{exp.location}</span>
+//                   </div>
+//                 </div>
+
+//                 {/* Skills */}
+//                 <div>
+//                   <h4 className="text-xs font-bold uppercase tracking-wider mb-2 md:mb-3 flex items-center gap-2 opacity-70">
+//                     <Briefcase size={14} /> Key Achievements
+//                   </h4>
+//                   <div className="flex flex-wrap gap-2">
+//                     {exp.skills.map((skill, i) => (
+//                       <span key={i} className={`text-[10px] md:text-[11px] font-bold px-2.5 py-1 md:px-3 md:py-1.5 rounded-full border transition-colors
+//                                                 ${isDarkMode
+//                           ? 'border-purple-400/30 bg-purple-500/20 text-purple-200'
+//                           : 'border-purple-200 bg-purple-50 text-purple-700'
+//                         }`}>
+//                         {skill}
+//                       </span>
+//                     ))}
+//                   </div>
+//                 </div>
+//               </div>
+
+
+//               {/* === RIGHT COLUMN: Responsibilities === */}
+//               {/* MOBILE FIX: pt-4 border-t (Mobile Separator) -> lg:pl-10 (Laptop Separator) */}
+//               <div className="w-full lg:w-[65%] border-t lg:border-t-0 lg:border-l border-gray-200/20 pt-5 lg:pt-0 lg:pl-10">
+//                 <h4 className={`text-base md:text-lg font-bold mb-4 md:mb-6 flex items-center gap-2 
+//                                     ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+//                   <span className="text-purple-500 text-lg md:text-xl">&lt;/&gt;</span>
+//                   Key Responsibilities
+//                 </h4>
+
+//                 <ul className="space-y-1">
+//                   {exp.responsibilities.map((point, index) => (
+//                     <li key={index}
+//                       // MOBILE FIX: p-2.5 (Less padding) -> md:p-4 (More padding)
+//                       className={`flex gap-3 items-start p-2.5 md:p-4 rounded-xl transition-colors duration-500 ease-in-out cursor-default
+//                                                 ${isDarkMode
+//                           ? 'hover:bg-purple-900/30 hover:border hover:border-purple-500/30 border border-transparent'
+//                           : 'hover:bg-gray-100 border border-transparent hover:border-gray-200'
+//                         }`}
+//                     >
+//                       <CheckCircle2 size={18} className="text-purple-500 mt-0.5 shrink-0 md:w-5 md:h-5 transition-transform duration-500" />
+
+//                       <span className={`text-sm md:text-base leading-relaxed opacity-90 transition-colors duration-500
+//                                                 ${isDarkMode ? 'text-gray-200 group-hover:text-white' : 'text-gray-700 group-hover:text-black'}`}>
+//                         {point}
+//                       </span>
+//                     </li>
+//                   ))}
+//                 </ul>
+//               </div>
+
+//             </div>
+//           </div>
+//         ))}
+
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default Experience;
+
+
+
+import React, { useState, useEffect } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import { MapPin, Calendar, Briefcase, CheckCircle2 } from 'lucide-react';
+// 1. Firebase imports
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../../firebase';
 
 const Experience = () => {
-  const { isDarkMode } = useTheme();
+    const { isDarkMode } = useTheme();
 
-  const experiences = [
-    {
-      id: 1,
-      role: "Senior Mobile Developer",
-      company: "SoftRadix Technologies",
-      period: "May 2021 - Aug 2024",
-      location: "Mohali, India",
-      logo: "/Group1.svg",
-      skills: ["Solo Development", "Team Building", "KMP Expertise"],
-      responsibilities: [
-        "I utilized Android and Flutter to develop mobile apps. Worked with cross-functional teams to design and implement new features",
+    // 2. Default Hardcoded Data (Backup ke liye)
+    const defaultExperiences = [
+        {
+            id: 1,
+            role: "Senior Mobile Developer",
+            company: "SoftRadix Technologies",
+            period: "May 2021 - Aug 2024",
+            location: "Mohali, India",
+            logo: "/Group1.svg",
+            skills: ["Solo Development", "Team Building", "KMP Expertise"],
+            responsibilities: [
+                "I utilized Android and Flutter to develop mobile apps. Worked with cross-functional teams to design and implement new features",
+                "Provided feedback on code quality during code reviews to ensure adherence to best practices.",
+                "Various Android applications, such as Herency, SmartBiz - Logistics, Smartbiz partner app, and Chikasha Keyboard, have been developed and maintained."
+            ]
+        },
+        {
+            id: 2,
+            role: "Android Developer",
+            company: "Doozycod Systems",
+            period: "Feb 2019 - April 2021",
+            location: "Mohali, India",
+            logo: "/Group1.svg",
+            skills: ["Solo Development", "Team Building", "KMP Expertise"],
+            responsibilities: [
+                "Designed and developed native Android applications for a variety of clients, focusing on functionality, usability, and performance.",
+                "Collaborated with product managers, designers, and other developers to understand project requirements and translate them into technical specifications and implementation plans.",
+            ]
+        },
+    ];
 
-        "Provided feedback on code quality during code reviews to ensure adherence to best practices.",
+    // 3. State initialize karo Default data ke sath
+    const [experiences, setExperiences] = useState(defaultExperiences);
 
-        "Various Android applications, such as Herency, SmartBiz - Logistics, Smartbiz partner app, and Chikasha Keyboard, have been developed and maintained."
-      ]
-    },
-    {
-      id: 2,
-      role: "Android Developer",
-      company: "Doozycod Systems",
-      period: "Feb 2019 - April 2021",
-      location: "Mohali, India",
-      logo: "/Group1.svg",
-      skills: ["Solo Development", "Team Building", "KMP Expertise"],
-      responsibilities: [
-        "Designed and developed native Android applications for a variety of clients, focusing on functionality, usability, and performance.",
+    // 4. useEffect Data Fetching ke liye
+    useEffect(() => {
+        const fetchExperience = async () => {
+            try {
+                // Path: portfolio_data -> experience
+                const docRef = doc(db, "portfolio_data", "experience");
+                const docSnap = await getDoc(docRef);
 
-        "Collaborated with product managers, designers, and other developers to understand project requirements and translate them into technical specifications and implementation plans.",
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    
+                    // Database object ko Array me convert karna
+                    const formattedData = Object.values(data).map((item, index) => ({
+                        id: index + 10,
+                        role: item.role,
+                        company: item.company,
+                        period: item.period,
+                        location: item.location,
+                        logo: item.logo, // Base64 image
+                        
+                        // Error Handling: Agar skills array nahi hai to empty array le lo
+                        skills: Array.isArray(item.skills) ? item.skills : Object.values(item.skills || {}),
+                        
+                        // CRITICAL: DB me 'Responsibilities' (Capital R) object hai, usse array banao
+                        responsibilities: item.Responsibilities ? Object.values(item.Responsibilities) : []
+                    }));
+                    
+                    // Data ko reverse kar rahe hain taaki latest experience upar aaye (Optional)
+                    setExperiences(formattedData.reverse());
+                    console.log("Experience Data Fetched ✅");
+                }
+            } catch (error) {
+                console.error("Error fetching experience, using fallback ❌", error);
+            }
+        };
 
-      ]
-    },
-    // Add more...
-  ];
+        fetchExperience();
+    }, []);
 
-  return (
-    <div id='work' className={`pt-20 pb-20 relative min-h-screen font-sans px-4 md:px-10 lg:px-20 transition-colors duration-300
+    return (
+        <div id='work' className={`pt-20 pb-20 relative min-h-screen font-sans px-4 md:px-10 lg:px-20 transition-colors duration-300
             ${isDarkMode ? 'bg-[#1a0b2e] text-white' : 'bg-gray-50 text-gray-900'}`}>
 
-      {/* --- BACKGROUND GLOWS --- */}
-      <div className={`absolute top-[20%] left-0 w-[300px] md:w-[400px] h-[300px] md:h-[400px] blur-[120px] rounded-full pointer-events-none -z-10
+            {/* --- BACKGROUND GLOWS --- */}
+            <div className={`absolute top-[20%] left-0 w-[300px] md:w-[400px] h-[300px] md:h-[400px] blur-[120px] rounded-full pointer-events-none -z-10
                 ${isDarkMode ? 'bg-purple-900/40' : 'bg-purple-200/50'}`} />
-      <div className={`absolute bottom-[20%] right-0 w-[300px] md:w-[400px] h-[300px] md:h-[400px] blur-[120px] rounded-full pointer-events-none -z-10
+            <div className={`absolute bottom-[20%] right-0 w-[300px] md:w-[400px] h-[300px] md:h-[400px] blur-[120px] rounded-full pointer-events-none -z-10
                 ${isDarkMode ? 'bg-blue-900/20' : 'bg-blue-200/50'}`} />
 
 
-      {/* --- HEADING --- */}
-      <div className="mb-12 md:mb-16 relative z-10 max-w-7xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-center md:text-left font-['Preahvihear']">
-          Work Experience
-        </h2>
-      </div>
+            {/* --- HEADING --- */}
+            <div className="mb-12 md:mb-16 relative z-10 max-w-7xl mx-auto">
+                <h2 className="text-3xl md:text-4xl font-bold text-center md:text-left font-['Preahvihear']">
+                    Work Experience
+                </h2>
+            </div>
 
 
-      {/* --- CARDS CONTAINER --- */}
-      <div className="space-y-8 md:space-y-10 max-w-7xl mx-auto relative z-10">
+            {/* --- CARDS CONTAINER --- */}
+            <div className="space-y-8 md:space-y-10 max-w-7xl mx-auto relative z-10">
 
-        {experiences.map((exp) => (
-          <div
-            key={exp.id}
-            // MOBILE FIX: p-5 (Mobile) -> md:p-10 (Tablet/Laptop)
-            className={`rounded-3xl p-5 md:p-10 transition-all duration-300 group
+                {/* Yahan ab State wala data map hoga */}
+                {experiences.map((exp) => (
+                    <div
+                        key={exp.id}
+                        className={`rounded-3xl p-5 md:p-10 transition-all duration-300 group
                             ${isDarkMode
-                ? 'bg-linear-to-b from-[#3a1c5e] to-[#2a0f45] border border-[#563085] shadow-[inset_0_1px_0_rgba(255,255,255,0.15)] hover:from-[#452270] hover:to-[#321355]'
-                : 'bg-white border border-gray-100 shadow-lg hover:shadow-2xl hover:-translate-y-1'
-              }`}
-          >
-            {/* MOBILE FIX: gap-6 (Kam gap) -> lg:gap-12 (Bada gap) */}
-            <div className="flex flex-col lg:flex-row gap-6 lg:gap-12">
-
-              {/* === LEFT COLUMN: Role Info === */}
-              {/* MOBILE FIX: space-y-4 (Compact) -> lg:space-y-6 (Relaxed) */}
-              <div className="w-full lg:w-[35%] space-y-4 lg:space-y-6">
-                <div className="flex items-center gap-3 md:gap-4">
-
-                  {/* MOBILE FIX: Logo Size w-12 (Mobile) -> w-14 (Tablet+) */}
-                  <div className={`w-12 h-12 md:w-14 md:h-14 rounded-xl flex items-center justify-center p-2 shrink-0
-                                        ${isDarkMode ? 'bg-white/10 backdrop-blur-sm' : 'bg-gray-50 border border-gray-100'}`}>
-                    <img src={exp.logo} alt="Logo" className="w-full h-full object-contain" />
-                  </div>
-
-                  <div>
-                    {/* MOBILE FIX: Font size text-lg (Mobile) -> text-xl (Tablet+) */}
-                    <h3 className="text-lg md:text-xl font-bold leading-tight">{exp.role}</h3>
-                    <p className={`text-sm font-semibold mt-0.5 md:mt-1 ${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>
-                      {exp.company}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Date & Location */}
-                <div className="space-y-2 md:space-y-3">
-                  <div className={`flex items-center gap-3 p-2.5 md:p-3 rounded-xl transition-colors
-                                        ${isDarkMode ? 'bg-[#2a1454]/50 border border-white/5' : 'bg-gray-100 text-gray-700'}`}>
-                    <Calendar size={16} className="text-purple-400 shrink-0 md:w-[18px] md:h-[18px]" />
-                    <span className="text-xs md:text-sm font-medium opacity-90">{exp.period}</span>
-                  </div>
-                  <div className={`flex items-center gap-3 p-2.5 md:p-3 rounded-xl transition-colors
-                                        ${isDarkMode ? 'bg-[#2a1454]/50 border border-white/5' : 'bg-gray-100 text-gray-700'}`}>
-                    <MapPin size={16} className="text-purple-400 shrink-0 md:w-[18px] md:h-[18px]" />
-                    <span className="text-xs md:text-sm font-medium opacity-90">{exp.location}</span>
-                  </div>
-                </div>
-
-                {/* Skills */}
-                <div>
-                  <h4 className="text-xs font-bold uppercase tracking-wider mb-2 md:mb-3 flex items-center gap-2 opacity-70">
-                    <Briefcase size={14} /> Key Achievements
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {exp.skills.map((skill, i) => (
-                      <span key={i} className={`text-[10px] md:text-[11px] font-bold px-2.5 py-1 md:px-3 md:py-1.5 rounded-full border transition-colors
-                                                ${isDarkMode
-                          ? 'border-purple-400/30 bg-purple-500/20 text-purple-200'
-                          : 'border-purple-200 bg-purple-50 text-purple-700'
-                        }`}>
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-
-              {/* === RIGHT COLUMN: Responsibilities === */}
-              {/* MOBILE FIX: pt-4 border-t (Mobile Separator) -> lg:pl-10 (Laptop Separator) */}
-              <div className="w-full lg:w-[65%] border-t lg:border-t-0 lg:border-l border-gray-200/20 pt-5 lg:pt-0 lg:pl-10">
-                <h4 className={`text-base md:text-lg font-bold mb-4 md:mb-6 flex items-center gap-2 
-                                    ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-                  <span className="text-purple-500 text-lg md:text-xl">&lt;/&gt;</span>
-                  Key Responsibilities
-                </h4>
-
-                <ul className="space-y-1">
-                  {exp.responsibilities.map((point, index) => (
-                    <li key={index}
-                      // MOBILE FIX: p-2.5 (Less padding) -> md:p-4 (More padding)
-                      className={`flex gap-3 items-start p-2.5 md:p-4 rounded-xl transition-colors duration-500 ease-in-out cursor-default
-                                                ${isDarkMode
-                          ? 'hover:bg-purple-900/30 hover:border hover:border-purple-500/30 border border-transparent'
-                          : 'hover:bg-gray-100 border border-transparent hover:border-gray-200'
-                        }`}
+                                ? 'bg-linear-to-b from-[#3a1c5e] to-[#2a0f45] border border-[#563085] shadow-[inset_0_1px_0_rgba(255,255,255,0.15)] hover:from-[#452270] hover:to-[#321355]'
+                                : 'bg-white border border-gray-100 shadow-lg hover:shadow-2xl hover:-translate-y-1'
+                            }`}
                     >
-                      <CheckCircle2 size={18} className="text-purple-500 mt-0.5 shrink-0 md:w-5 md:h-5 transition-transform duration-500" />
+                        <div className="flex flex-col lg:flex-row gap-6 lg:gap-12">
 
-                      <span className={`text-sm md:text-base leading-relaxed opacity-90 transition-colors duration-500
-                                                ${isDarkMode ? 'text-gray-200 group-hover:text-white' : 'text-gray-700 group-hover:text-black'}`}>
-                        {point}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                            {/* === LEFT COLUMN: Role Info === */}
+                            <div className="w-full lg:w-[35%] space-y-4 lg:space-y-6">
+                                <div className="flex items-center gap-3 md:gap-4">
+
+                                    <div className={`w-12 h-12 md:w-14 md:h-14 rounded-xl flex items-center justify-center p-2 shrink-0
+                                            ${isDarkMode ? 'bg-white/10 backdrop-blur-sm' : 'bg-gray-50 border border-gray-100'}`}>
+                                        <img src={exp.logo} alt="Logo" className="w-full h-full object-contain" />
+                                    </div>
+
+                                    <div>
+                                        <h3 className="text-lg md:text-xl font-bold leading-tight">{exp.role}</h3>
+                                        <p className={`text-sm font-semibold mt-0.5 md:mt-1 ${isDarkMode ? 'text-blue-300' : 'text-blue-600'}`}>
+                                            {exp.company}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                {/* Date & Location */}
+                                <div className="space-y-2 md:space-y-3">
+                                    <div className={`flex items-center gap-3 p-2.5 md:p-3 rounded-xl transition-colors
+                                            ${isDarkMode ? 'bg-[#2a1454]/50 border border-white/5' : 'bg-gray-100 text-gray-700'}`}>
+                                        <Calendar size={16} className="text-purple-400 shrink-0 md:w-[18px] md:h-[18px]" />
+                                        <span className="text-xs md:text-sm font-medium opacity-90">{exp.period}</span>
+                                    </div>
+                                    <div className={`flex items-center gap-3 p-2.5 md:p-3 rounded-xl transition-colors
+                                            ${isDarkMode ? 'bg-[#2a1454]/50 border border-white/5' : 'bg-gray-100 text-gray-700'}`}>
+                                        <MapPin size={16} className="text-purple-400 shrink-0 md:w-[18px] md:h-[18px]" />
+                                        <span className="text-xs md:text-sm font-medium opacity-90">{exp.location}</span>
+                                    </div>
+                                </div>
+
+                                {/* Skills */}
+                                <div>
+                                    <h4 className="text-xs font-bold uppercase tracking-wider mb-2 md:mb-3 flex items-center gap-2 opacity-70">
+                                        <Briefcase size={14} /> Key Achievements
+                                    </h4>
+                                    <div className="flex flex-wrap gap-2">
+                                        {exp.skills.map((skill, i) => (
+                                            <span key={i} className={`text-[10px] md:text-[11px] font-bold px-2.5 py-1 md:px-3 md:py-1.5 rounded-full border transition-colors
+                                                    ${isDarkMode
+                                                    ? 'border-purple-400/30 bg-purple-500/20 text-purple-200'
+                                                    : 'border-purple-200 bg-purple-50 text-purple-700'
+                                                }`}>
+                                                {skill}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            {/* === RIGHT COLUMN: Responsibilities === */}
+                            <div className="w-full lg:w-[65%] border-t lg:border-t-0 lg:border-l border-gray-200/20 pt-5 lg:pt-0 lg:pl-10">
+                                <h4 className={`text-base md:text-lg font-bold mb-4 md:mb-6 flex items-center gap-2 
+                                        ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                                    <span className="text-purple-500 text-lg md:text-xl">&lt;/&gt;</span>
+                                    Key Responsibilities
+                                </h4>
+
+                                <ul className="space-y-1">
+                                    {exp.responsibilities.map((point, index) => (
+                                        <li key={index}
+                                            className={`flex gap-3 items-start p-2.5 md:p-4 rounded-xl transition-colors duration-500 ease-in-out cursor-default
+                                                ${isDarkMode
+                                                    ? 'hover:bg-purple-900/30 hover:border hover:border-purple-500/30 border border-transparent'
+                                                    : 'hover:bg-gray-100 border border-transparent hover:border-gray-200'
+                                                }`}
+                                        >
+                                            <CheckCircle2 size={18} className="text-purple-500 mt-0.5 shrink-0 md:w-5 md:h-5 transition-transform duration-500" />
+
+                                            <span className={`text-sm md:text-base leading-relaxed opacity-90 transition-colors duration-500
+                                                    ${isDarkMode ? 'text-gray-200 group-hover:text-white' : 'text-gray-700 group-hover:text-black'}`}>
+                                                {point}
+                                            </span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                ))}
 
             </div>
-          </div>
-        ))}
-
-      </div>
-    </div>
-  );
+        </div>
+    );
 }
 
 export default Experience;

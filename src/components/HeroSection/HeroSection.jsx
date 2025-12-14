@@ -217,13 +217,45 @@
 
 
 
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import Lottie from "lottie-react";
 import developer from '../../assets/ChaiCode.json'
 import { useTheme } from '../context/ThemeContext';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../../firebase';
 
 const HeroSection = () => {
+
     const { isDarkMode } = useTheme();
+
+    const defaultBio = "A Senior Mobile Developer with 5+ years of experience in Flutter & Android. I lead development teams, ensure code quality, and translate complex client requirements into scalable, high-performance applications.";
+
+    const [bio, setBio] = useState(defaultBio);
+
+    useEffect(() => {
+        const fetchBio = async () => {
+            try {
+                // Database path: portfolio_data -> hero_section
+                const docRef = doc(db, "portfolio_data", "hero_section");
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    // Agar database me 'bio' field hai to update karo
+                    if (data.bio) {
+                        setBio(data.bio);
+                        console.log("Bio updated from Database ✅");
+                    }
+                }
+            } catch (error) {
+                console.error("Error fetching bio, keeping default ❌", error);
+            }
+        };
+
+        fetchBio();
+    }, []);
+
+
     return (
         <div id="home" className={`pt-32 relative min-h-screen overflow-hidden font-sans transition-colors duration-300 
             ${isDarkMode ? 'bg-[#1a0b2e] text-white' : 'bg-white text-gray-900'}`}>
@@ -342,8 +374,7 @@ const HeroSection = () => {
 
                     {/* Bio Paragraph */}
                     <p className="text-white font-['Preahvihear']  text-sm md:pt-28  md:text-lg leading-relaxed max-w-2xl mx-auto md:mx-0 lg:ml-32">
-                        {/* Maine 'md:text-sm' ko 'md:text-base' kar diya taaki tablet pe thoda bada aur saaf dikhe */}
-                        A Senior Mobile Developer with 5+ years of experience in Flutter & Android. I lead development teams, ensure code quality, and translate complex client requirements into scalable, high-performance applications.
+                        {bio}
                     </p>
 
                 </div>
